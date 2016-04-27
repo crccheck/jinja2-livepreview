@@ -20,3 +20,9 @@ Developing
 
     mkvirtualenv jinja2-livepreview --py=python3.5
     make install
+
+
+Prior art
+---------
+
+* https://github.com/abourguignon/jinja2-live-parser Original by `abourguignon`
