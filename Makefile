@@ -22,3 +22,6 @@ docker/bash: ## Run a shell in the Docker image
 
 docker/run: ## Run Docker image
 	docker run --rm -v ${PWD}:/app -p 8080:8080 crccheck/jinja2-livepreview
+
+docker/push: ## Publish Docker image to the registry
+	docker push crccheck/jinja2-livepreview
