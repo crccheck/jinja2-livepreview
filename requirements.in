@@ -1,0 +1,8 @@
+aiohttp
+jinja2
+project_runpy
+pyyaml
+
+# Dev
+pip-tools
+coverage==4.1b2

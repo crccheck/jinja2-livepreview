@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+    .input {
+      position: relative;
+      height: 12em;
+      width: 100%;
+    }
+
+    #log {
+      height: 12em;
+      overflow-y: scroll;
+      whitespace: pre;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    Hello World
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="jinja2">Jinja2</label>
+        <div class="input" id="jinja2">Example Template {{ test }}</div>
+
+        <label for="context">Context
+          <span id="context-detect-container">(<span id="context-yaml">YAML</span>
+          or
+          <span id="context-json">JSON</span>)</span>
+        </label>
+        <div class="input" id="context"></div>
+      </div>
+      <div class="col-sm-6">
+        Output
+        <pre id="output"></pre>
+      </div>
+
+    </div>
+    <h4>Logs</h4>
+    <div id="log"><div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-json.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-yaml.js"></script>
+  <script src="static/bundles/app.js"></script>
+</body>
