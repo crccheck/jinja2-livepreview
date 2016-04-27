@@ -10,6 +10,14 @@ class WebSocketHandlerTests(TestCase):
         self.view = WebSocketHandler(self.request)
         self.view.ws = mock.Mock()
 
+    def test_context_type_getter(self):
+        self.assertEqual(self.view.context_type, None)
+
+    def test_context_type_setter(self):
+        self.view.context_type = 'moo'
+        self.assertEqual(self.view.context_type, 'moo')
+        self.view.ws.send_str.assert_called_once_with('{"context_type": "moo"}')
+
     def test_send_sends_json(self):
         self.view.send({'foo': 'bar'})
         self.view.ws.send_str.assert_called_once_with('{"foo": "bar"}')

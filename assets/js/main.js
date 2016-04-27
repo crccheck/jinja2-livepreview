@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import _ from 'lodash'
 
 function log (message) {
   const container = $('#log')[0]
@@ -12,13 +13,18 @@ const jinja2Editor = window.ace.edit('jinja2')
 const contextEditor = window.ace.edit('context')
 contextEditor.getSession().setMode('ace/mode/yaml')
 
-$('#jinja2').on('keyup', (e) => {
-  sock.send(JSON.stringify({jinja2: jinja2Editor.getValue()}))
-})
+// TODO don't send unless value changed
 
-$('#context').on('keyup', (e) => {
+$('#jinja2').on('keyup', _.debounce((e) => {
+  sock.send(JSON.stringify({jinja2: jinja2Editor.getValue()}))
+}, 200))
+
+$('#context')
+.on('keyup', _.debounce((e) => {
   sock.send(JSON.stringify({context: contextEditor.getValue()}))
-})
+}, 200))
+// Keep navbar pills from being clickable, I just want the styling
+.prev().find('a').on('click', false)
 
 // WebSocket
 
@@ -41,6 +47,17 @@ sock.onmessage = function (event) {
       log(data.error)
     } else if ('render' in data) {
       $('#output').text(data.render)
+    } else if ('context_type' in data) {
+      if (data.context_type === 'json') {
+        $('#context-json').attr('class', 'active')
+        $('#context-yaml').attr('class', 'disabled')
+      } else if (data.context_type === 'yaml') {
+        $('#context-json').attr('class', 'disabled')
+        $('#context-yaml').attr('class', 'active')
+      } else {
+        $('#context-json').attr('class', 'disabled')
+        $('#context-yaml').attr('class', 'disabled')
+      }
     } else {
       log(event.data)
     }

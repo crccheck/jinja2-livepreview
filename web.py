@@ -14,8 +14,20 @@ async def index(request):
 
 class WebSocketHandler(web.View):
     context = {}
-    context_type = None
     jinja2 = ''
+    _content_type = None
+
+    @property
+    def context_type(self):
+        return self._content_type
+
+    @context_type.setter
+    def context_type(self, value):
+        if value == self._content_type:
+            return
+
+        self._content_type = value
+        self.send({'context_type': value})
 
     def send(self, data):
         self.ws.send_str(json.dumps(data))

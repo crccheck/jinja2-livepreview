@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Jinja2 Live Preview</title>
+  <meta property="og:description" content="Experiment with Jinja2 templates from your browser.">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <style>
     .input {
@@ -15,37 +16,50 @@
     #log {
       height: 12em;
       overflow-y: scroll;
-      whitespace: pre;
+    }
+    #log p {
+      margin: 0;
     }
   </style>
 </head>
 <body>
   <div class="container-fluid">
-    Hello World
     <div class="row">
       <div class="col-sm-6">
-        <label for="jinja2">Jinja2</label>
-        <div class="input" id="jinja2">Example Template {{ test }}</div>
+        <h4>Jinja2 Template
+          <small><span class="glyphicon glyphicon-question-sign" title="Put your Jinja2 template here"></span></small>
+        </h4>
+        <div class="input" id="jinja2">Example template, replace this with your template
+  {{ cool }}</div>
 
-        <label for="context">Context
-          <span id="context-detect-container">(<span id="context-yaml">YAML</span>
-          or
-          <span id="context-json">JSON</span>)</span>
-        </label>
-        <div class="input" id="context"></div>
+        <ul class="nav nav-pills">
+          <li><h4>Context
+            <small><span class="glyphicon glyphicon-question-sign"
+                         title="Put your template context here, the backend will automatically detect json/yaml"></span></small>
+          </h4></li>
+          <li id="context-json" class="disabled"><a href="#">JSON</a></li>
+          <li id="context-yaml" class="disabled"><a href="#">YAML</a></li>
+        </ul>
+        <div class="input" id="context">cool: me now</div>
       </div>
       <div class="col-sm-6">
-        Output
+        <h4>Output
+          <small><span class="glyphicon glyphicon-question-sign" title="The rendered template will appear here"></span></small>
+        </h4>
         <pre id="output"></pre>
       </div>
-
     </div>
-    <h4>Logs</h4>
-    <div id="log"></div>
+
+    <h4>Logs
+      <small><span class="glyphicon glyphicon-question-sign" title="Errors and debugging will show here"></span></small>
+    </h4>
+    <pre id="log"></pre>
+
     <footer>
-      <p>
+      <p><small>
         Homepage: <a href="https://github.com/crccheck/jinja2-livepreview">crccheck/jinja2-livepreview</a>
-      </p>
+        Docs: <a href="http://jinja.pocoo.org/docs/dev/templates/">Jinja2</a>
+      </small></p>
     </footer>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
