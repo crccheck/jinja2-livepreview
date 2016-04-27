@@ -1,7 +1,12 @@
 Jinja2 Live Preview
 ===================
 
-[![Build Status](https://travis-ci.org/crccheck/jinja-livepreview.svg)](https://travis-ci.org/crccheck/jinja-livepreview)
+[![Build Status](https://travis-ci.org/crccheck/jinja-livepreview.svg)](https://travis-ci.org/crccheck/jinja2-livepreview)
+
+If you've ever wondered how a Jinja2 filter would work in an Ansible template,
+but cried at the thought of doing a run just to test a template, this is for
+you.
+
 
 Running the project
 -------------------

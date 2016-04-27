@@ -5,6 +5,7 @@ from aiohttp import web
 from project_runpy import env
 from jinja2 import Environment
 from jinja2.exceptions import TemplateError
+from ansible.plugins.filter import core, ipaddr, mathstuff
 
 
 async def index(request):
@@ -16,6 +17,16 @@ class WebSocketHandler(web.View):
     context = {}
     jinja2 = ''
     _content_type = None
+    j2_env = Environment()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.j2_env.filters = {
+          # XXX this syntax breaks coverage line reporting
+          **mathstuff.FilterModule().filters(),
+          **ipaddr.FilterModule().filters(),
+          **core.FilterModule().filters(),
+         }
 
     @property
     def context_type(self):
@@ -65,9 +76,8 @@ class WebSocketHandler(web.View):
             })
 
     def render_to_user(self):
-        print('render', self.jinja2, self.context)  # DELETEME
         try:
-            out = Environment().from_string(self.jinja2).render(**self.context)
+            out = self.j2_env.from_string(self.jinja2).render(**self.context)
         except TemplateError as e:
             self.send({
                 'error': 'Invalid jinja2 {}'.format(e),
@@ -82,8 +92,6 @@ class WebSocketHandler(web.View):
         self.ws = ws
 
         async for msg in ws:
-            print(msg.data)
-
             try:
                 in_data = json.loads(msg.data)
             except TypeError as e:
@@ -96,7 +104,6 @@ class WebSocketHandler(web.View):
                 self.jinja2 = in_data['jinja2']
 
             self.render_to_user()
-
         return ws
 
 

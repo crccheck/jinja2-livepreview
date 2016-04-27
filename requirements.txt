@@ -6,13 +6,21 @@
 #
 
 aiohttp==0.21.5
+ansible==2.0.2.0
 chardet==2.3.0            # via aiohttp
 click==6.6                # via pip-tools
 coverage==4.1b2
+ecdsa==0.13               # via paramiko
 first==2.0.1              # via pip-tools
 jinja2==2.8
 markupsafe==0.23          # via jinja2
+paramiko==1.16.0          # via ansible
 pip-tools==1.6.1
 project-runpy==0.3.1
+pycrypto==2.6.1           # via ansible, paramiko
 pyyaml==3.11
 six==1.10.0               # via pip-tools
+
+# The following packages are commented out because they are
+# considered to be unsafe in a requirements file:
+# setuptools                # via ansible
