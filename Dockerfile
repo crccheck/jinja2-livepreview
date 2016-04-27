@@ -1,6 +1,10 @@
 FROM python:3.5-alpine
 MAINTAINER Chris Chang
 
+RUN apk add --no-cache \
+      # Ansible/pycypto
+      gcc g++ make libffi-dev openssl-dev
+
 COPY requirements.txt /app/requirements.txt
 RUN pip install --disable-pip-version-check -r /app/requirements.txt
 
