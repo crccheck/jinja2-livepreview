@@ -17,7 +17,7 @@
     "browserify": "^13.0.0",
     "jquery": "^2.2.3",
     "lodash": "^4.11.1",
-    "standard": "^6.0.8",
+    "standard": "^7.1.2",
     "watchify": "^3.7.0"
   }
 }
