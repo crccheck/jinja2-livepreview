@@ -6,13 +6,17 @@ install: ## Install requirements
 	pip install -r requirements.txt
 	npm install
 
+.PHONY: requirements.txt
 requirements.txt: ## Regenerate requirements.txt
-requirements.txt: requirements.in
-	pip-compile $< > $@
+	pip-compile --upgrade --output-file $@ requirements.in
 
 test: ## Run test suite
 	coverage run -m unittest test_web
 	coverage report --show-missing || true
+
+docker/assets: ## Build assets/bundles via Docker
+	mkdir -p assets/bundles
+	docker run --rm -v ${PWD}:/app:rw --workdir /app node:6 /bin/sh -c "npm install && npm run build"
 
 docker/build: ## Build Docker image
 	docker build -t crccheck/jinja2-livepreview .
