@@ -2,7 +2,7 @@ aiohttp
 jinja2<3.0
 project_runpy
 pyyaml<4.0
-ansible<2.1
+ansible<2.2
 
 # Dev
 pip-tools<2.0

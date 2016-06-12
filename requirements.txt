@@ -6,7 +6,7 @@
 #
 
 aiohttp==0.21.6
-ansible==2.0.2.0
+ansible==2.1.0.0
 cffi==1.6.0               # via cryptography
 chardet==2.3.0            # via aiohttp
 click==6.6                # via pip-tools
@@ -15,7 +15,7 @@ cryptography==1.4         # via paramiko
 first==2.0.1              # via pip-tools
 idna==2.1                 # via cryptography
 jinja2==2.8
-MarkupSafe==0.23          # via jinja2
+markupsafe==0.23          # via jinja2
 paramiko==2.0.0           # via ansible
 pip-tools==1.6.5
 project-runpy==0.3.1

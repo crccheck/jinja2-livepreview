@@ -7,7 +7,7 @@ install: ## Install requirements
 	npm install
 
 .PHONY: requirements.txt
-requirements.txt: ## Regenerate requirements.txt
+requirements.txt: ## Compile requirements.txt
 	pip-compile --upgrade --output-file $@ requirements.in
 
 test: ## Run test suite
