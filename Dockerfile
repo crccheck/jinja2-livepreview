@@ -1,8 +1,8 @@
-FROM python:3.5-alpine
+FROM python:3.6-alpine
 MAINTAINER Chris Chang
 
 RUN apk add --no-cache \
-      # Ansible/pycypto
+      # Ansible/pycrypto
       gcc g++ make libffi-dev openssl-dev
 
 COPY requirements.txt /app/requirements.txt

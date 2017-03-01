@@ -14,6 +14,9 @@ test: ## Run test suite
 	coverage run -m unittest test_web
 	coverage report --show-missing || true
 
+dev: ## Run the server with a watcher
+	nodemon --ext py -x python web.py
+
 docker/assets: ## Build assets/bundles via Docker
 	mkdir -p assets/bundles
 	docker run --rm -v ${PWD}:/app:rw --workdir /app node:6 /bin/sh -c "npm install && npm run build"

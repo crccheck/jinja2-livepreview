@@ -10,7 +10,7 @@ from ansible.plugins.filter import core, ipaddr, mathstuff
 
 async def index(request):
     with open('public/index.html', 'rb') as f:
-        return web.Response(body=f.read())
+        return web.Response(body=f.read(), content_type='text/html')
 
 
 class WebSocketHandler(web.View):
@@ -26,7 +26,7 @@ class WebSocketHandler(web.View):
           **mathstuff.FilterModule().filters(),
           **ipaddr.FilterModule().filters(),
           **core.FilterModule().filters(),
-         }
+        }
 
     @property
     def context_type(self):
@@ -61,7 +61,7 @@ class WebSocketHandler(web.View):
         else:
             self.context_type = 'yaml'
             try:
-                self.context = yaml.load(context_str)
+                self.context = yaml.safe_load(context_str)
             except Exception as e:
                 self.send({
                     'error': '{}: {}'.format(e.__class__.__name__, e),
