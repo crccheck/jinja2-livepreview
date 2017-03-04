@@ -1,23 +1,29 @@
 import json
 
+import aiohttp_jinja2
+import ansible
+import jinja2
 import yaml
 from aiohttp import web
-from project_runpy import env
+from ansible.plugins.filter import core, ipaddr, mathstuff
 from jinja2 import Environment
 from jinja2.exceptions import TemplateError
-from ansible.plugins.filter import core, ipaddr, mathstuff
+from project_runpy import env
 
 
+@aiohttp_jinja2.template('index.html')
 async def index(request):
-    with open('public/index.html', 'rb') as f:
-        return web.Response(body=f.read(), content_type='text/html')
+    return {
+        'ansible_version': ansible.__version__,
+        'jinja2_version': jinja2.__version__,
+    }
 
 
 class WebSocketHandler(web.View):
     context = {}
-    jinja2 = ''
-    _content_type = None
     j2_env = Environment()
+    j2_template = ''
+    _content_type = None
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -77,7 +83,7 @@ class WebSocketHandler(web.View):
 
     def render_to_user(self):
         try:
-            out = self.j2_env.from_string(self.jinja2).render(**self.context)
+            out = self.j2_env.from_string(self.j2_template).render(**self.context)
         except TemplateError as e:
             self.send({
                 'error': 'Invalid jinja2 {}'.format(e),
@@ -101,7 +107,7 @@ class WebSocketHandler(web.View):
                 self.process_context(in_data['context'].strip())
 
             if 'jinja2' in in_data:
-                self.jinja2 = in_data['jinja2']
+                self.j2_template = in_data['jinja2']
 
             self.render_to_user()
         return ws
@@ -109,6 +115,7 @@ class WebSocketHandler(web.View):
 
 if __name__ == '__main__':
     app = web.Application()
+    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('public'))
 
     app.router.add_route('GET', '/', index)  # TODO try and see if add_static will work
     app.router.add_route('GET', '/ws', WebSocketHandler)

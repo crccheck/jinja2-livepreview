@@ -1,12 +1,10 @@
 aiohttp
+aiohttp-jinja2
+ansible<2.2
 jinja2<3.0
 project_runpy
 pyyaml<4.0
-ansible<2.2
 
 # Dev
 pip-tools<2.0
-coverage<5.0
-
-# Ugh
-pip<8.1.2  # https://github.com/nvie/pip-tools/issues/358
+coverage

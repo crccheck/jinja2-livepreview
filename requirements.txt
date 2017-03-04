@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-
+aiohttp-jinja2==0.13.0
 aiohttp==1.3.3
 ansible==2.1.4.0
 appdirs==1.4.2            # via setuptools
@@ -15,9 +15,9 @@ click==6.7                # via pip-tools
 coverage==4.3.4
 cryptography==1.7.2       # via paramiko
 first==2.0.1              # via pip-tools
-idna==2.3                 # via cryptography
+idna==2.4                 # via cryptography
 jinja2==2.8.1
-markupsafe==0.23          # via jinja2
+MarkupSafe==0.23          # via jinja2
 multidict==2.1.4          # via aiohttp, yarl
 packaging==16.8           # via setuptools
 paramiko==2.1.2           # via ansible
@@ -31,7 +31,5 @@ pyyaml==3.12
 six==1.10.0               # via cryptography, packaging, pip-tools, setuptools
 yarl==0.9.8               # via aiohttp
 
-# The following packages are commented out because they are
-# considered to be unsafe in a requirements file:
-# pip
+# The following packages are considered to be unsafe in a requirements file:
 # setuptools                # via ansible, cryptography

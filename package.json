@@ -11,7 +11,7 @@
   "private": true,
   "devDependencies": {
     "babel-core": "^6.23.1",
-    "babel-preset-env": "^1.1.10",
+    "babel-preset-env": "^1.1.11",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "jquery": "^3.1.1",

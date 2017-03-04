@@ -66,14 +66,14 @@ class WebSocketHandlerTests(TestCase):
         self.view.ws.send_str.assert_called_once_with('{"render": ""}')
 
     def test_render_to_user_renders(self):
-        self.view.jinja2 = '{{ foo }}'
+        self.view.j2_template = '{{ foo }}'
         self.view.context = {'foo': 'bar'}
 
         self.view.render_to_user()
         self.view.ws.send_str.assert_called_once_with('{"render": "bar"}')
 
     def test_render_to_user_handles_bad_template(self):
-        self.view.jinja2 = '{{ foo }'
+        self.view.j2_template = '{{ foo }'
 
         self.view.render_to_user()
         self.assertIn('error-jinja2', self.view.ws.send_str.call_args[0][0])
